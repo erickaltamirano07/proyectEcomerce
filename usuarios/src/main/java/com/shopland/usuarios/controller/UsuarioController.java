@@ -25,19 +25,19 @@ public class UsuarioController {
 
     private final UsuarioCrudService service;
 
-    @GetMapping("/info/{}")
+    @GetMapping("/info/{username}")
     public ResponseEntity<UsuarioClientResponse> getUsuario(@PathVariable String username) {
         Usuario usuario = service.getUsuario(username);
         UsuarioClientResponse clientResponse = UsuarioClientResponse.builder()
                 .id(usuario.getId()) // Mapeo del ID del usuario
                 .nombre(usuario.getNombre()) // Mapeo del nombre
+                .username(usuario.getUsername())
                 .email(usuario.getEmail()) // Mapeo del email
                 .build();
         return ResponseEntity.ok(clientResponse);
     }
 
     @GetMapping("/usuariosList")
-    @PreAuthorize("Admin")
     public ResponseEntity<List<UsuarioAdminResponse>> getUsuarios() {
         List<Usuario> usuarios = service.getUsuarios();
         List<UsuarioAdminResponse> adminResponses = usuarios.stream()
