@@ -1,0 +1,28 @@
+server:
+  port: 8081
+spring:
+  application:
+    name: ms-usuarios
+  app:
+    jwtSecret: 1sdada4s641dsdfsdfsddfsddsfjdskhfhdsakfjgalskdgfljhdasg
+    jwtExpirationMs: 3600000
+  datasource:
+    url: jdbc:postgresql://localhost:5432/usuarios
+    username: postgres
+    password: 1234
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+    defer-datasource-initialization: true
+
+eureka:
+  instance:
+    preferIpAddress: true
+    hostname: ${HOSTNAME:localhost}
+
+  client:
+    registerWithEureka: true
+    fetchRegistry: true
+    serviceUrl:
+      defaultZone: ${EUREKA_URL:http://admin:admin123@localhost:8761/eureka}
